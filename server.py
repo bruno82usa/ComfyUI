@@ -3,7 +3,6 @@ import sys
 import asyncio
 import traceback
 import time
-
 import nodes
 import folder_paths
 import execution
@@ -196,6 +195,8 @@ def create_block_external_middleware():
 class PromptServer():
     def __init__(self, loop):
         PromptServer.instance = self
+        if loop is None:
+            loop = asyncio.get_event_loop()
 
         self.user_manager = UserManager()
         self.model_file_manager = ModelFileManager()
