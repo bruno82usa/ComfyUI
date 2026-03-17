@@ -29,11 +29,6 @@ setup_logger(log_level=args.verbose, use_stdout=args.log_stdout)
 
 faulthandler.enable(file=sys.stderr, all_threads=False)
 
-import comfy_aimdo.control
-
-if enables_dynamic_vram():
-    comfy_aimdo.control.init()
-
 if os.name == "nt":
     os.environ['MIMALLOC_PURGE_DELAY'] = '0'
 
@@ -205,6 +200,7 @@ import hook_breaker_ac10a0
 
 import comfy.memory_management
 import comfy.model_patcher
+import comfy_aimdo
 
 if args.enable_dynamic_vram or (enables_dynamic_vram() and comfy.model_management.is_nvidia() and not comfy.model_management.is_wsl()):
     if (not args.enable_dynamic_vram) and (comfy.model_management.torch_version_numeric < (2, 8)):
